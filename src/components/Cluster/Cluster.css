@@ -1,0 +1,83 @@
+/* Main container styling */
+.main-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Cluster container styling */
+.cluster-container {
+  width: 100%; /* Full width */
+  max-width: 1200px; /* Set a maximum width */
+  margin: 20px auto; /* Center the container */
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.main-title{
+  margin-top: 4rem;
+}
+
+/* Result section styling */
+.result-section {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  margin-bottom: 20px; /* Add bottom margin */
+}
+
+/* Cluster file styling */
+.cluster-file {
+  width: 100%; /* Full width */
+  max-width: 1200px; /* Set a maximum width */
+  margin: 20px auto; /* Center the container */
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background-color: #ffffff;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Hover effect */
+.cluster-file:hover {
+  transform: scale(1.05);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Button styling */
+.cluster-file button {
+  margin-top: 8px;
+  padding: 7px 12px; /* Adjust padding */
+  font-size: 0.8rem; /* Reduce font size */
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+  transition: background-color 0.3s ease-in-out;
+}
+
+/* Button hover effect */
+.cluster-file button:hover {
+  background-color: #0056b3;
+}
+
+/* Cluster visualization image styling */
+.result-card img {
+  width: 100%;
+  border-radius: 8px;
+  margin-top: 1rem;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Additional adjustments for responsiveness */
+@media screen and (max-width: 768px) {
+  .cluster-file {
+    width: 100%; /* Full width on smaller screens */
+  }
+}
+
+

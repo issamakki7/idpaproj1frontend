@@ -27,6 +27,11 @@ function Navbar() {
       url: "/search",
       cName: "nav-links",
     },
+    {
+      title: "Clustering",
+      url: "/cluster",
+      cName: "nav-links",
+    },
   ];
 
   return (

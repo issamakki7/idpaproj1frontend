@@ -114,3 +114,26 @@
     );
     transition: all 0.4s ease-out;
   }
+
+  
+  .choice-section{
+    margin-bottom: 20px;
+    display: flex; 
+  }
+  
+  /* Radio options */
+  .radio-section {
+    margin-bottom: 10px;
+    margin-right: 6rem;
+  }
+  
+  .similarity-radio-section{
+    margin-bottom: 10px;
+    margin-left: 6rem;
+  }
+
+
+.radio-title{
+    margin: 1rem 0;
+}
+

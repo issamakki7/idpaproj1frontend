@@ -56,14 +56,14 @@ const Search: React.FC = () => {
       console.log('Response:', response.data.similarity);
       setResults(response.data.similarity);
       setTime(response.data.time.toFixed(5));
-
+      
     })
     .catch((error) => {
       console.error('Error occurred:', error);
       // Handle errors if needed
     });
   };
-
+  
   const handleFileSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     
@@ -83,7 +83,7 @@ const Search: React.FC = () => {
       console.log('Response:', response.data.similarity);
       setResults(response.data.similarity);
       setTime(response.data.time.toFixed(5));
-
+      
     })
     .catch((error) => {
       console.error('Error occurred:', error);
@@ -147,37 +147,37 @@ const Search: React.FC = () => {
       }
     });
   }
-
+  
   function getFilenameFromPath(filePath) {
     // Split the path using forward slashes
     const pathParts = filePath.split('/');
-  
+    
     // Get the last part of the path (filename)
     const filename = pathParts[pathParts.length - 1];
-  
+    
     return filename;
   }
-
+  
   function handleDownload(key) {
     console.log(key);
     axios
-      .get(`${import.meta.env.VITE_LOCALHOST}/indexing_tables/get_txt_file?txt_file_path=${key}`, { responseType: 'text' }) // Specify responseType as 'text'
-      .then((response) => {
-        console.log('Server Response:', response.data);
-  
-        // Create a Blob with the text content
-        const blob = new Blob([response.data], { type: 'text/plain' });
-  
-        // Use file-saver library to save the Blob as a file and trigger download
-        saveAs(blob, 'downloadedFile.txt');
-      })
-      .catch((error) => {
-        console.error('Error:', error);
-        // Check the error response for more details
-        if (error.response) {
-          console.error('Server Error Response:', error.response.data);
-        }
-      });
+    .get(`${import.meta.env.VITE_LOCALHOST}/indexing_tables/get_txt_file?txt_file_path=${key}`, { responseType: 'text' }) // Specify responseType as 'text'
+    .then((response) => {
+      console.log('Server Response:', response.data);
+      
+      // Create a Blob with the text content
+      const blob = new Blob([response.data], { type: 'text/plain' });
+      
+      // Use file-saver library to save the Blob as a file and trigger download
+      saveAs(blob, 'downloadedFile.txt');
+    })
+    .catch((error) => {
+      console.error('Error:', error);
+      // Check the error response for more details
+      if (error.response) {
+        console.error('Server Error Response:', error.response.data);
+      }
+    });
   }
   
   return (
@@ -220,7 +220,7 @@ const Search: React.FC = () => {
     id="formFile"
     onChange={handleFileChange}
     />
-     <Button sx={{ marginLeft: '1rem' }} variant='outlined' onClick={handleFileSubmit} className="search-button">
+    <Button sx={{ marginLeft: '1rem' }} variant='outlined' onClick={handleFileSubmit} className="search-button">
     <SearchIcon />
     </Button>
     </div>
@@ -232,24 +232,17 @@ const Search: React.FC = () => {
     onChange={(e) => setIndexingEnabled(e.target.checked)}
     />
     <label htmlFor="flexSwitchCheckChecked">Enable Indexing</label>
+    
+    <div className='choice-section'>
+    
+    
+    <div className="radio-section">
     <RadioGroup sx={{marginBottom:"1rem"}} row aria-label="options" name="options" value={tfIdf} onChange={(e) => setTfIdf(e.target.value)}>
     <FormControlLabel value="0" control={<Radio />} label="TF" />
     <FormControlLabel value="1" control={<Radio />} label="TF-IDF" />
     </RadioGroup>
-    <Typography variant="h6" className="radio-title">Choose Similarity Measure</Typography>
-    <FormControl component="fieldset">
-    <RadioGroup value={selectedMetric} onChange={handleMetricChange}>
-    <FormControlLabel value="cosine" control={<Radio />} label="Cosine Similarity" />
-    <FormControlLabel value="PCC" control={<Radio />} label="Pearson Correlation Coefficient" />
-    <FormControlLabel value="euclidian" control={<Radio />} label="Euclidean Similarity" />
-    <FormControlLabel value="manhattan" control={<Radio />} label="Manhattan Similarity" />
-    <FormControlLabel value="jaccard" control={<Radio />} label="Jaccard Similarity" />
-    <FormControlLabel value="dice" control={<Radio />} label="Dice Similarity" />
-    </RadioGroup>
-    </FormControl>
-    <Typography sx={{marginBottom:"1rem"}}></Typography>
     <FormControl variant="standard" sx={{ width: 190 }}>
-
+    
     <InputLabel id="exampleFormControlSelect1">K-th Nearest Neighbor</InputLabel>
     <Select
     labelId="exampleFormControlSelect1"
@@ -273,28 +266,53 @@ const Search: React.FC = () => {
     onChange={(e) => setRangeSelector(parseFloat(e.target.value))}
     />
     </FormControl>
+    
+    
+    </div>
+    <div className="similarity-radio-section">
+    <Typography variant="h6" className="radio-title">Choose Similarity Measure</Typography>
+    <FormControl component="fieldset">
+    <RadioGroup value={selectedMetric} onChange={handleMetricChange}>
+    <FormControlLabel value="cosine" control={<Radio />} label="Cosine Similarity" />
+    <FormControlLabel value="PCC" control={<Radio />} label="Pearson Correlation Coefficient" />
+    <FormControlLabel value="euclidian" control={<Radio />} label="Euclidean Similarity" />
+    <FormControlLabel value="manhattan" control={<Radio />} label="Manhattan Similarity" />
+    <FormControlLabel value="jaccard" control={<Radio />} label="Jaccard Similarity" />
+    <FormControlLabel value="dice" control={<Radio />} label="Dice Similarity" />
+    </RadioGroup>
+    </FormControl>
+    </div>
+    
+    
+    </div>
+    
+    
+    
+    
+    {/* <Typography sx={{marginBottom:"1rem"}}></Typography> */}
+    
     </div>
     </form>
-   
+    
     </div>
     </div>
     
     <div className="container search-results">
-  <div className="">
+    <div className="">
     <Typography variant="h5" gutterBottom>Search Results</Typography>
     <Typography variant="body1" gutterBottom>({time}s)</Typography>
-  </div>
-  
-  {Object.keys(results).map((key) => (
-    <div key={key} className="search-results-header">
+    </div>
+    
+    {Object.keys(results).map((key) => (
+      <div key={key} className="search-results-header">
       <Typography variant="subtitle1">{getFilenameFromPath(key)}</Typography>
       <Typography variant="body1">Similarity: {results[key].toFixed(5)}</Typography>
       <Button onClick={() => handleDownload(key)} sx={{ marginTop: "1rem", fontSize: "0.8rem" }} variant='contained'>Download File</Button>
-    </div>
-  ))}
-  <button onClick={handleComputeIndexingTable} className="compute-btn">Compute Indexing Table</button>
-</div>
-
+      </div>
+      ))}
+      <button onClick={handleComputeIndexingTable} className="compute-btn">Compute Indexing Table</button>
+      </div>
+      
       
       </div>
       
